@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">XRecyclerView</string>
+    <string name="header_hint_refresh_normal">下拉刷新</string>
+    <string name="header_hint_refresh_ready">释放立即刷新</string>
+    <string name="header_hint_refresh_loading">正在更新中&#8230;</string>
+    <string name="header_hint_refresh_time">时间：</string>
+    <string name="footer_hint_loading">加载中&#8230;</string>
+    <string name="footer_hint_load_normal">加载更多</string>
+    <string name="footer_hint_load_ready">释放立即加载&#8230;</string>
+    <string name="footer_hint_load_none">没有更多了</string>
+    <string name="footer_hint_load_error">请点击重新加载</string>
+</resources>

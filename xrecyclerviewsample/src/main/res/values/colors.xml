@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="color_000000">#000000</color>
+    <color name="color_000000_0">#00000000</color>
+    <color name="color_000000_10">#E5000000</color>
+    <color name="color_000000_20">#CC000000</color>
+    <color name="color_000000_30">#B2000000</color>
+    <color name="color_000000_40">#99000000</color>
+    <color name="color_000000_50">#7F000000</color>
+    <color name="color_000000_60">#66000000</color>
+    <color name="color_000000_70">#4C000000</color>
+    <color name="color_000000_80">#33000000</color>
+    <color name="color_000000_90">#1A000000</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_444444">#444444</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_777777">#777777</color>
+    <color name="color_888888">#888888</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_bbbbbb">#bbbbbb</color>
+    <color name="color_cccccc">#cccccc</color>
+    <color name="color_dddddd">#dddddd</color>
+    <color name="color_eeeeee">#eeeeee</color>
+    <color name="color_ffffff_10">#E5ffffff</color>
+    <color name="color_ffffff_20">#CCffffff</color>
+    <color name="color_ffffff_30">#B2ffffff</color>
+    <color name="color_ffffff_40">#99ffffff</color>
+    <color name="color_ffffff_50">#7Fffffff</color>
+    <color name="color_ffffff_60">#66ffffff</color>
+    <color name="color_ffffff_70">#4cffffff</color>
+    <color name="color_ffffff_80">#33ffffff</color>
+    <color name="color_ffffff_90">#1Affffff</color>
+    <color name="color_ffffff">#ffffff</color>
+</resources>
