@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="XRecyclerView">
-        <attr name="xrv_dots_normal_width" format="dimension" />
-        <attr name="xrv_dots_background_focused" format="reference" />
-        <attr name="xrv_dots_gradientbackground_visible" format="boolean" />
-        <attr name="xrv_time" format="integer" />
-        <attr name="xrv_ratio" format="float" />
+        <attr name="xrv_footview_textsize" format="dimension" />
+        <attr name="xrv_footview_textcolor" format="reference" />
+        <attr name="xrv_footview_loading" format="string" />
+        <attr name="xrv_footview_loaderror" format="string" />
+        <attr name="xrv_footview_loadfinish" format="string" />
     </declare-styleable>
 </resources>

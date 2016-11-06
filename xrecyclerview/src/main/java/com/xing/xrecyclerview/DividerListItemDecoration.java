@@ -18,9 +18,9 @@ public class DividerListItemDecoration extends RecyclerView.ItemDecoration {
     /**
      * RecyclerView的list分割线
      *
-     * @param context
-     * @param orientation
-     * @param item_divider
+     * @param context 上下文
+     * @param orientation 方向
+     * @param item_divider Drawable资源
      */
     public DividerListItemDecoration(Context context, int orientation, int item_divider) {
         mDivider = context.getResources().getDrawable(item_divider);
@@ -71,8 +71,8 @@ public class DividerListItemDecoration extends RecyclerView.ItemDecoration {
                     .getLayoutParams();
             final int left = child.getRight() + params.rightMargin;
             final int right = left + mDivider.getIntrinsicWidth();
-            mDivider.draw(c);
             mDivider.setBounds(left, top, right, bottom);
+            mDivider.draw(c);
         }
     }
 

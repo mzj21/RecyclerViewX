@@ -1,12 +1,15 @@
 package com.xing.xrecyclerview;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -14,7 +17,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class XRecyclerView extends RecyclerView {
+    private static float DEF_FOOTVIEW_TEXTSIZE;
+    private static int DEF_FOOTVIEW_TEXTCOLOR;
     private static final int BASE_ITEM_TYPE_HEADER = 100000;
+    private float footview_textsize;
+    private int footview_textcolor;
+    private String footview_loading;
+    private String footview_loaderror;
+    private String footview_loadfinish;
     public final static int TYPE_FOOTER = 1;    // 底部--往往是loading_more
     private boolean mIsFooterEnable = true;     // 是否允许加载更多
     private boolean mIsLoadMore = true;    // 调用是否允许加载更多
@@ -27,6 +37,7 @@ public class XRecyclerView extends RecyclerView {
     private ProgressBar footer_progressbar;
     private TextView footer_hint_text;
     private AutoLoadAdapter.HeaderViewHolder headerViewHolder;
+    private TypedArray ta;
 
     public XRecyclerView(Context context) {
         super(context, null);
@@ -34,6 +45,15 @@ public class XRecyclerView extends RecyclerView {
 
     public XRecyclerView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        ta = context.obtainStyledAttributes(attrs, R.styleable.XRecyclerView);
+        DEF_FOOTVIEW_TEXTSIZE = getResources().getDimension(R.dimen.text_size_14sp);
+        DEF_FOOTVIEW_TEXTCOLOR = getResources().getColor(R.color.color_cccccc);
+        footview_textsize = ta.getDimension(R.styleable.XRecyclerView_xrv_footview_textsize, DEF_FOOTVIEW_TEXTSIZE);
+        footview_textcolor = ta.getColor(R.styleable.XRecyclerView_xrv_footview_textcolor, DEF_FOOTVIEW_TEXTCOLOR);
+        footview_loading = ta.getString(R.styleable.XRecyclerView_xrv_footview_loading);
+        footview_loaderror = ta.getString(R.styleable.XRecyclerView_xrv_footview_loaderror);
+        footview_loadfinish = ta.getString(R.styleable.XRecyclerView_xrv_footview_loadfinish);
+        ta.recycle();
         init();
     }
 
@@ -42,6 +62,8 @@ public class XRecyclerView extends RecyclerView {
         FootView.setLayoutParams(new LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         footer_hint_text = (TextView) FootView.findViewById(R.id.footer_hint_text);
         footer_progressbar = (ProgressBar) FootView.findViewById(R.id.footer_progressbar);
+        footer_hint_text.setTextSize(TypedValue.COMPLEX_UNIT_PX, footview_textsize);
+        footer_hint_text.setTextColor(footview_textcolor);
         super.addOnScrollListener(new OnScrollListener() {
 
             @Override
@@ -115,7 +137,7 @@ public class XRecyclerView extends RecyclerView {
         public int getItemViewType(int position) {
             if (isHeaderViewPos(position)) {
                 return mHeaderViews.keyAt(position);
-            } else if (position == getItemCount() - 1&& mIsFooterEnable) {
+            } else if (position == getItemCount() - 1 && mIsFooterEnable) {
                 return TYPE_FOOTER;
             }
             return mInternalAdapter.getItemViewType(position - getHeadersCount());
@@ -324,7 +346,8 @@ public class XRecyclerView extends RecyclerView {
         FootView.setVisibility(View.VISIBLE);
         footer_progressbar.setVisibility(View.VISIBLE);
         footer_hint_text.setVisibility(View.VISIBLE);
-        footer_hint_text.setText(R.string.footer_hint_loading);
+        footer_hint_text.setText(TextUtils.isEmpty(footview_loading) ? getResources().getString(R.string.footer_hint_loading) : footview_loading);
+
         FootView.setOnClickListener(null);
     }
 
@@ -339,7 +362,7 @@ public class XRecyclerView extends RecyclerView {
         FootView.setVisibility(View.VISIBLE);
         footer_progressbar.setVisibility(View.INVISIBLE);
         footer_hint_text.setVisibility(View.VISIBLE);
-        footer_hint_text.setText(R.string.footer_hint_load_error);
+        footer_hint_text.setText(TextUtils.isEmpty(footview_loaderror) ? getResources().getString(R.string.footer_hint_load_error) : footview_loaderror);
         FootView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -348,7 +371,7 @@ public class XRecyclerView extends RecyclerView {
                 setLoadingMore(false);
                 setLoadMore(true);
                 footer_progressbar.setVisibility(View.VISIBLE);
-                footer_hint_text.setText(R.string.footer_hint_loading);
+                footer_hint_text.setText(TextUtils.isEmpty(footview_loading) ? getResources().getString(R.string.footer_hint_loading) : footview_loading);
             }
         });
     }
@@ -364,7 +387,7 @@ public class XRecyclerView extends RecyclerView {
         FootView.setVisibility(View.VISIBLE);
         footer_progressbar.setVisibility(View.INVISIBLE);
         footer_hint_text.setVisibility(View.VISIBLE);
-        footer_hint_text.setText(R.string.footer_hint_load_none);
+        footer_hint_text.setText(TextUtils.isEmpty(footview_loadfinish) ? getResources().getString(R.string.footer_hint_load_finish) : footview_loadfinish);
         FootView.setOnClickListener(null);
     }
 
@@ -379,7 +402,7 @@ public class XRecyclerView extends RecyclerView {
         footer_progressbar.setVisibility(View.INVISIBLE);
         FootView.setVisibility(View.VISIBLE);
         footer_hint_text.setVisibility(View.VISIBLE);
-        footer_hint_text.setText(R.string.footer_hint_load_none);
+        footer_hint_text.setText(TextUtils.isEmpty(footview_loadfinish) ? getResources().getString(R.string.footer_hint_load_finish) : footview_loadfinish);
         FootView.setOnClickListener(l);
     }
 

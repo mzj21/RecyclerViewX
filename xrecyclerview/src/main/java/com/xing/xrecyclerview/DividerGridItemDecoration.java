@@ -1,5 +1,6 @@
 package com.xing.xrecyclerview;
 
+import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,7 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
     private Drawable mDivider;
     private int spanCount;          // 行数
     private int spacing;            // 间距
+    private int color;            // 间距
     private boolean includeEdge;   // 最边缘是否有间距
 
     /**
@@ -16,20 +18,26 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
      *
      * @param spanCount   行数
      * @param spacing     间距
+     * @param color       颜色
      * @param includeEdge 最边缘是否有间距
      */
-    public DividerGridItemDecoration(int spanCount, int spacing, boolean includeEdge) {
+    public DividerGridItemDecoration(int spanCount, int spacing, int color, boolean includeEdge) {
         this.spanCount = spanCount;
         this.spacing = spacing;
+        this.color = color;
         this.includeEdge = includeEdge;
+    }
+
+    @Override
+    public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+        super.onDraw(c, parent, state);
     }
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         int position = parent.getChildAdapterPosition(view); // item position
-        int column = position % spanCount; // item column
+        int column = position % spanCount; // item column\
         if (includeEdge) {
-
             if (position < spanCount) {
                 outRect.set(spacing - column * spacing / spanCount, spacing,
                         (column + 1) * spacing / spanCount, spacing);
