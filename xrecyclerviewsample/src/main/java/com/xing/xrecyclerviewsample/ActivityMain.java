@@ -1,17 +1,17 @@
 package com.xing.xrecyclerviewsample;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.xing.xrecyclerview.DividerGridItemDecoration;
 import com.xing.xrecyclerview.DividerListItemDecoration;
 import com.xing.xrecyclerview.XRecyclerView;
 
@@ -23,7 +23,7 @@ public class ActivityMain extends AppCompatActivity implements XRecyclerView.Loa
     XRecyclerView xRecyclerView;
     List<String> datas;
     RecyclerViewAdapter recyclerViewAdapter;
-    int loadnum = 30;
+    int loadnum = 31;
     boolean isneterror, isnomore;
     int Type;
     int a;
@@ -34,9 +34,8 @@ public class ActivityMain extends AppCompatActivity implements XRecyclerView.Loa
         setContentView(R.layout.activity_main);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.mSwipeRefreshLayout);
         xRecyclerView = (XRecyclerView) findViewById(R.id.xRecyclerView);
-//        xRecyclerView.setLayoutManager(new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false));
-        xRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL, false));
-
+//        xRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL, false));
+        xRecyclerView.setLayoutManager(new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false));
         isneterror = false;
         isnomore = false;
         init();
@@ -51,9 +50,10 @@ public class ActivityMain extends AppCompatActivity implements XRecyclerView.Loa
         xRecyclerView.addHeaderView(view1);
         xRecyclerView.addHeaderView(view2);
         xRecyclerView.setLoadMoreListener(this);
-//        xRecyclerView.addItemDecoration(new DividerGridItemDecoration(3, getResources().getDimensionPixelOffset(R.dimen._5dp), true));
-        xRecyclerView.addItemDecoration(new DividerListItemDecoration(this, DividerListItemDecoration.VERTICAL_LIST, R.drawable.item_divider_v));
-
+//        xRecyclerView.addItemDecoration(new DividerListItemDecoration(DividerListItemDecoration.VERTICAL,
+//                getResources().getDimensionPixelSize(R.dimen._1dp), getResources().getColor(R.color.colorPrimary)));
+        xRecyclerView.addItemDecoration(new DividerGridItemDecoration(2, 3,
+                getResources().getDimensionPixelSize(R.dimen._1dp), getResources().getColor(R.color.colorPrimary), true));
         mSwipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {

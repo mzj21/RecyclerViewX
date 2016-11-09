@@ -13,10 +13,15 @@
     <dimen name="text_size_21sp">21sp</dimen>
     <dimen name="text_size_22sp">22sp</dimen>
 
+    <dimen name="_1dp">1dp</dimen>
     <dimen name="_2dp">2dp</dimen>
     <dimen name="_3dp">3dp</dimen>
+    <dimen name="_4dp">4dp</dimen>
     <dimen name="_5dp">5dp</dimen>
+    <dimen name="_6dp">6dp</dimen>
+    <dimen name="_7dp">7dp</dimen>
     <dimen name="_8dp">8dp</dimen>
+    <dimen name="_9dp">9dp</dimen>
     <dimen name="_10dp">10dp</dimen>
     <dimen name="_15dp">15dp</dimen>
     <dimen name="_20dp">20dp</dimen>

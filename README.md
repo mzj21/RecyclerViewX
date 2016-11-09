@@ -27,7 +27,7 @@ allprojects {
 Step 2. Add the dependency
 ```
 dependencies {
-	    compile 'com.github.mzj21:XRecyclerView:1.1.0'
+	    compile 'com.github.mzj21:XRecyclerView:1.2.0'
 }
 ```
 
@@ -54,7 +54,8 @@ View view2 = LayoutInflater.from(this).inflate(R.layout.headview2, xRecyclerView
 xRecyclerView.addHeaderView(view1);  //添加头部
 xRecyclerView.addHeaderView(view2); 
 xRecyclerView.setLoadMoreListener(this); //添加加载更多监听
-xRecyclerView.addItemDecoration(new DividerListItemDecoration(this, DividerListItemDecoration.VERTICAL_LIST, R.drawable.item_divider_v));//添加分割线
+xRecyclerView.addItemDecoration(new DividerListItemDecoration(DividerListItemDecoration.VERTICAL,
+                getResources().getDimensionPixelSize(R.dimen._1dp), getResources().getColor(R.color.colorPrimary)));//添加分割线
 ```
 ### xml 属性
 - xrv_footview_textsize: 				底部加载更多的字体大小，默认14sp
@@ -62,9 +63,6 @@ xRecyclerView.addItemDecoration(new DividerListItemDecoration(this, DividerListI
 - xrv_footview_loading: 				底部加载更多加载时的文字，默认'加载中&#8230;'
 - xrv_footview_loaderror: 				底部加载更多错误时的文字，默认'请点击重新加载'
 - xrv_footview_loadfinish:  			底部加载更多加载完成时的文字，默认'没有更多了'
-
-### 未来
-修下个版本改分割线写法
 
 ### 感谢
 * [http://blog.csdn.net/lmj623565791/article/details/45059587](http://blog.csdn.net/lmj623565791/article/details/45059587)

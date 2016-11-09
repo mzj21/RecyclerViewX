@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -21,4 +21,4 @@
             app:xrv_footview_loaderror="@string/footer_hint_load_error"
             app:xrv_footview_loadfinish="@string/footer_hint_load_finish"/>
     </android.support.v4.widget.SwipeRefreshLayout>
-</LinearLayout>
+</merge>
