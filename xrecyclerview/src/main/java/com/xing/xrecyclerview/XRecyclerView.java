@@ -419,6 +419,13 @@ public class XRecyclerView extends RecyclerView {
     }
 
     /**
+     * 主动刷新
+     */
+    public void refresh() {
+        mAutoLoadAdapter.notifyDataSetChanged();
+    }
+    
+    /**
      * 获取XRecyclerView的高度
      *
      * @param dividerHeight 间距
