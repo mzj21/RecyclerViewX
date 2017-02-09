@@ -3,7 +3,6 @@ package com.xing.xrecyclerview;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
     private int mHeadNum;
@@ -26,29 +25,33 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
         this.isHavaHeadDivider = isHavaHeadDivider;
     }
 
-    private boolean getFirstH(int itemPosition) {
+    private boolean isFootView(int childCount, int itemPosition) {
+        return childCount - itemPosition - 1 == 0;
+    }
+
+    private boolean isFirstH(int itemPosition) {
         return (itemPosition - mHeadNum) % mSpanCount == 0;
     }
 
-    private boolean getSecondH(int itemPosition) {
+    private boolean isSecondH(int itemPosition) {
         return (itemPosition - mHeadNum) % mSpanCount == 1;
     }
 
-    private boolean getSecondLastH(int itemPosition) {
+    private boolean isSecondLastH(int itemPosition) {
         return (itemPosition - mHeadNum) % mSpanCount == mSpanCount - 2;
     }
 
-    private boolean getLastH(int itemPosition) {
+    private boolean isLastH(int itemPosition) {
         return (itemPosition - mHeadNum) % mSpanCount == mSpanCount - 1;
     }
 
-    private boolean getLastV(int childCount, int itemPosition) {
-        return childCount - itemPosition - mHeadNum - 1 <= mSpanCount;
+    private boolean isLastV(int childCount, int itemPosition) {
+        return childCount - itemPosition - mHeadNum - 1 <= mSpanCount - (itemPosition - mHeadNum) % mSpanCount;
     }
 
     private int getBottomSpacing(int childCount, int itemPosition) {
         int bottomSpacing;
-        if (getLastV(childCount, itemPosition)) {
+        if (isLastV(childCount, itemPosition)) {
             bottomSpacing = 0;
         } else {
             bottomSpacing = mSpacing;
@@ -65,13 +68,15 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
             } else {
                 outRect.set(0, 0, 0, 0);
             }
-        } else if (getFirstH(itemPosition)) {
+        } else if (isFootView(childCount, itemPosition)) {
+            outRect.set(0, 0, 0, 0);
+        } else if (isFirstH(itemPosition)) {
             outRect.set(0, 0, mSpacing / mSpanCount * (mSpanCount - 1), getBottomSpacing(childCount, itemPosition));
-        } else if (getSecondH(itemPosition)) {
+        } else if (isSecondH(itemPosition)) {
             outRect.set(mSpacing / mSpanCount, 0, mSpacing / mSpanCount * (mSpanCount - 2), getBottomSpacing(childCount, itemPosition));
-        } else if (getSecondLastH(itemPosition)) {
+        } else if (isSecondLastH(itemPosition)) {
             outRect.set(mSpacing / mSpanCount * (mSpanCount - 2), 0, mSpacing / mSpanCount, getBottomSpacing(childCount, itemPosition));
-        } else if (getLastH(itemPosition)) {
+        } else if (isLastH(itemPosition)) {
             outRect.set(mSpacing / mSpanCount * (mSpanCount - 1), 0, 0, getBottomSpacing(childCount, itemPosition));
         } else {
             outRect.set(mSpacing / 2, 0, mSpacing / 2, getBottomSpacing(childCount, itemPosition));
