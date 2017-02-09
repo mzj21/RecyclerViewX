@@ -3,6 +3,7 @@ package com.xing.xrecyclerview;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
     private int mHeadNum;
@@ -42,7 +43,7 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     private boolean getLastV(int childCount, int itemPosition) {
-        return childCount - itemPosition - mHeadNum < mSpanCount;
+        return childCount - itemPosition - mHeadNum - 1 <= mSpanCount;
     }
 
     private int getBottomSpacing(int childCount, int itemPosition) {
