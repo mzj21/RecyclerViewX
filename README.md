@@ -1,4 +1,4 @@
-# RecyclerViewX
+# XRecyclerView
 ![Demo](https://github.com/mzj21/xrecyclerview/blob/master/screenshots/xrecyclerview1.gif?raw=true)
 ![Demo](https://github.com/mzj21/xrecyclerview/blob/master/screenshots/xrecyclerview2.gif?raw=true)
 
@@ -28,7 +28,7 @@ allprojects {
 Step 2. Add the dependency
 ```
 dependencies {
-	    compile 'com.github.mzj21:RecyclerViewX:1.2.5'
+	    compile 'com.github.mzj21:XRecyclerView:1.2.7'
 }
 ```
 
