@@ -1,4 +1,4 @@
-# XRecyclerView
+# RecyclerViewX
 ![Demo](https://github.com/mzj21/xrecyclerview/blob/master/screenshots/xrecyclerview1.gif?raw=true)
 ![Demo](https://github.com/mzj21/xrecyclerview/blob/master/screenshots/xrecyclerview2.gif?raw=true)
 
