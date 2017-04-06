@@ -5,11 +5,13 @@ import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
 import com.xing.xrecyclerview.DividerGridItemDecoration;
+import com.xing.xrecyclerview.DividerListItemDecoration;
 import com.xing.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
@@ -36,8 +38,8 @@ public class XRecyclerViewActivity extends AppCompatActivity implements XRecycle
         setContentView(R.layout.activity_xrecyclerview);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.mSwipeRefreshLayout);
         xRecyclerView = (XRecyclerView) findViewById(R.id.xRecyclerView);
-//        xRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL, false));
-        xRecyclerView.setLayoutManager(new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false));
+        xRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+//        xRecyclerView.setLayoutManager(new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false));
         isneterror = false;
         isnomore = false;
         init();
@@ -52,9 +54,9 @@ public class XRecyclerViewActivity extends AppCompatActivity implements XRecycle
         xRecyclerView.addHeaderView(view1);
         xRecyclerView.addHeaderView(view2);
         xRecyclerView.setLoadMoreListener(this);
-//        xRecyclerView.addItemDecoration(new DividerListItemDecoration(DividerListItemDecoration.VERTICAL,
-//                getResources().getDimensionPixelSize(R.dimen._1dp), getResources().getColor(R.color.colorPrimary)));
-        xRecyclerView.addItemDecoration(new DividerGridItemDecoration(2, 3, getResources().getDimensionPixelSize(R.dimen._20dp), true));
+        xRecyclerView.addItemDecoration(new DividerListItemDecoration(DividerListItemDecoration.VERTICAL,
+                getResources().getDimensionPixelSize(R.dimen._1dp), getResources().getColor(R.color.colorPrimary)));
+//        xRecyclerView.addItemDecoration(new DividerGridItemDecoration(2, 3, getResources().getDimensionPixelSize(R.dimen._20dp), true));
         mSwipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
