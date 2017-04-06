@@ -7,4 +7,11 @@
         <attr name="xrv_footview_loaderror" format="string" />
         <attr name="xrv_footview_loadfinish" format="string" />
     </declare-styleable>
+    <declare-styleable name="XRecyclerViewRefresh">
+        <attr name="xrvr_footview_textsize" format="dimension" />
+        <attr name="xrvr_footview_textcolor" format="reference" />
+        <attr name="xrvr_footview_loading" format="string" />
+        <attr name="xrvr_footview_loaderror" format="string" />
+        <attr name="xrvr_footview_loadfinish" format="string" />
+    </declare-styleable>
 </resources>
