@@ -3,7 +3,7 @@
 ![Demo](https://github.com/mzj21/xrecyclerview/blob/master/screenshots/xrecyclerview2.gif?raw=true)
 
 ### 简介
-自定义RecyclerView，支持添加多个head，支持加载更多，支持自定义加载更多各种状态的文字、颜色、字体大小。如需添加刷新请参照xrecyclerviewsample。
+自定义RecyclerView，支持添加多个head，支持加载更多，支持自定义分割线，支持自定义加载更多各种状态的文字、颜色、字体大小。如需添加刷新请使用XRecyclerViewRefresh，参照xrecyclerviewsample。
 
 ### 目前
 1. 支持添加多个head
@@ -12,7 +12,7 @@
 4. 支持自定义属性
 
 ### 特别注意
-下来刷新需要自己添加，如SwipeRefreshLayout，详见xrecyclerviewsample。
+如需添加刷新请使用XRecyclerViewRefresh，参照xrecyclerviewsample。
 
 ### 使用
 Step 1. Add it in your root build.gradle at the end of repositories:
@@ -28,10 +28,12 @@ allprojects {
 Step 2. Add the dependency
 ```
 dependencies {
-	    compile 'com.github.mzj21:XRecyclerView:1.2.5'
+	    compile 'com.github.mzj21:XRecyclerView:1.3.0'
 }
 ```
 
+### 下载simpleApk
+[地址](https://github.com/mzj21/xrecyclerview/blob/master/xrecyclerviewsample.apk?raw=true)
 
 ### 例子
 ```
