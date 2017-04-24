@@ -39,14 +39,14 @@ dependencies {
 ```
 <com.xing.xrecyclerview.XRecyclerView
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/xrecyclerview"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    	android:id="@+id/xrecyclerview"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
 	app:xrv_footview_textsize="@dimen/text_size_14sp"
-    app:xrv_footview_textcolor="@color/color_cccccc"
+    	app:xrv_footview_textcolor="@color/color_cccccc"
 	app:xrv_footview_loading="@string/footer_hint_loading"
-    app:xrv_footview_loaderror="@string/footer_hint_load_error"
-    app:xrv_footview_loadfinish="@string/footer_hint_load_finish"/>
+    	app:xrv_footview_loaderror="@string/footer_hint_load_error"
+    	app:xrv_footview_loadfinish="@string/footer_hint_load_finish"/>
 ```
 添加数据
 ```
