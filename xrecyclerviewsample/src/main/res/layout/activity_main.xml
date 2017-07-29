@@ -16,12 +16,45 @@
         android:text="XRecyclerView"
         android:textSize="@dimen/text_size_18sp" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/black" />
+
     <TextView
         android:id="@+id/t2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="@dimen/_8dp"
-        android:text="XRecyclerViewRefresh"
+        android:text="XRecyclerViewActivity_LinearLayoutManager_H"
+        android:textSize="@dimen/text_size_18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/black" />
+
+    <TextView
+        android:id="@+id/t3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/_8dp"
+        android:text="XRecyclerViewRefresh_GridLayoutManage_V"
+        android:textSize="@dimen/text_size_18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/black" />
+
+    <TextView
+        android:id="@+id/t4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/_8dp"
+        android:text="XRecyclerViewRefresh_GridLayoutManage_H"
         android:textSize="@dimen/text_size_18sp" />
 </LinearLayout>

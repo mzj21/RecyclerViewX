@@ -1,20 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mSwipeRefreshLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <com.xing.xrecyclerview.XRecyclerView
-        android:id="@+id/xRecyclerView"
+    <LinearLayout
+        android:id="@+id/ll1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:xrv_footview_loaderror="@string/footer_hint_load_error"
-        app:xrv_footview_loadfinish="@string/footer_hint_load_finish"
-        app:xrv_footview_loading="@string/footer_hint_loading"
-        app:xrv_footview_textcolor="@color/color_cccccc"
-        app:xrv_footview_textsize="@dimen/text_size_14sp"
-        tools:listfooter="@layout/view_foot"
-        tools:listitem="@layout/item" />
-</android.support.v4.widget.SwipeRefreshLayout>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="分割线尺寸" />
+
+        <SeekBar
+            android:id="@+id/seekbar1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5dp"
+            android:max="20"
+            android:progress="5" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@android:color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GridLayoutManager--spanCount" />
+
+        <SeekBar
+            android:id="@+id/seekbar2"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5dp"
+            android:max="6"
+            android:progress="1" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="4" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="5" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="6" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="7" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="8" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@android:color/black" />
+    </LinearLayout>
+
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/mSwipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.xing.xrecyclerview.XRecyclerView
+            android:id="@+id/xRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:xrv_footview_loaderror="@string/footer_hint_load_error"
+            app:xrv_footview_loadfinish="@string/footer_hint_load_finish"
+            app:xrv_footview_loading="@string/footer_hint_loading"
+            app:xrv_footview_textcolor="@color/color_cccccc"
+            app:xrv_footview_textsize="@dimen/text_size_14sp"
+            tools:listfooter="@layout/view_foot"
+            tools:listitem="@layout/item" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

@@ -58,12 +58,6 @@ public class XRecyclerView extends RecyclerView {
     }
 
     private void init() {
-        FootView = View.inflate(getContext(), R.layout.view_foot, null);
-        FootView.setLayoutParams(new LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        footer_hint_text = (TextView) FootView.findViewById(R.id.footer_hint_text);
-        footer_progressbar = (ProgressBar) FootView.findViewById(R.id.footer_progressbar);
-        footer_hint_text.setTextSize(TypedValue.COMPLEX_UNIT_PX, footview_textsize);
-        footer_hint_text.setTextColor(footview_textcolor);
         super.addOnScrollListener(new OnScrollListener() {
 
             @Override
@@ -74,18 +68,46 @@ public class XRecyclerView extends RecyclerView {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if (mLoadMoreListener != null && !mIsLoadingMore && dy > 0 && mIsFooterEnable) {
-                    int lastVisiblePosition = getLastVisiblePosition();
-                    if (lastVisiblePosition + 1 == mAutoLoadAdapter.getItemCount()) {
-                        mLoadMorePosition = lastVisiblePosition;
-                        setLoadingMore(true);
-                        if (mIsLoadMore) {
-                            mLoadMoreListener.onLoadMore();
+                if (getLayoutManager().canScrollVertically()) {
+                    if (mLoadMoreListener != null && !mIsLoadingMore && dy > 0 && mIsFooterEnable) {
+                        int lastVisiblePosition = getLastVisiblePosition();
+                        if (lastVisiblePosition + 1 == mAutoLoadAdapter.getItemCount()) {
+                            mLoadMorePosition = lastVisiblePosition;
+                            setLoadingMore(true);
+                            if (mIsLoadMore) {
+                                mLoadMoreListener.onLoadMore();
+                            }
+                        }
+                    }
+                } else {
+                    if (mLoadMoreListener != null && !mIsLoadingMore && dx > 0 && mIsFooterEnable) {
+                        int lastVisiblePosition = getLastVisiblePosition();
+                        if (lastVisiblePosition + 1 == mAutoLoadAdapter.getItemCount()) {
+                            mLoadMorePosition = lastVisiblePosition;
+                            setLoadingMore(true);
+                            if (mIsLoadMore) {
+                                mLoadMoreListener.onLoadMore();
+                            }
                         }
                     }
                 }
             }
         });
+        FootView = View.inflate(getContext(), R.layout.view_foot, null);
+        footer_hint_text = (TextView) FootView.findViewById(R.id.footer_hint_text);
+        footer_progressbar = (ProgressBar) FootView.findViewById(R.id.footer_progressbar);
+        footer_hint_text.setTextSize(TypedValue.COMPLEX_UNIT_PX, footview_textsize);
+        footer_hint_text.setTextColor(footview_textcolor);
+    }
+
+    @Override
+    public void setLayoutManager(LayoutManager layout) {
+        super.setLayoutManager(layout);
+        if (((LinearLayoutManager) layout).getOrientation() == LinearLayoutManager.VERTICAL) {
+            FootView.setLayoutParams(new LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        } else {
+            FootView.setLayoutParams(new LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT));
+        }
     }
 
     /**
@@ -149,7 +171,6 @@ public class XRecyclerView extends RecyclerView {
             RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
             if (layoutManager instanceof GridLayoutManager) {
                 final GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
-                final GridLayoutManager.SpanSizeLookup spanSizeLookup = gridLayoutManager.getSpanSizeLookup();
                 gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                     @Override
                     public int getSpanSize(int position) {
@@ -173,7 +194,7 @@ public class XRecyclerView extends RecyclerView {
             }
             if (viewType == TYPE_FOOTER) {
                 return new FooterViewHolder(FootView);
-            } else { // type normal
+            } else {
                 return mInternalAdapter.onCreateViewHolder(parent, viewType);
             }
         }
@@ -230,17 +251,12 @@ public class XRecyclerView extends RecyclerView {
 
     /**
      * 切换layoutManager
-     * <p/>
-     * 为了保证切换之后页面上还是停留在当前展示的位置，记录下切换之前的第一条展示位置，切换完成之后滚动到该位置
-     * 另外切换之后必须要重新刷新下当前已经缓存的itemView，否则会出现布局错乱（俩种模式下的item布局不同），
-     * RecyclerView提供了swapAdapter来进行切换adapter并清理老的itemView cache
      */
     public void switchLayoutManager(LayoutManager layoutManager) {
-        int firstVisiblePosition = getFirstVisiblePosition();
-//        getLayoutManager().removeAllViews();
+        removeAllViews();
+//        int firstVisiblePosition = getFirstVisiblePosition();
         setLayoutManager(layoutManager);
-//        super.swapAdapter(mAutoLoadAdapter, true);
-        getLayoutManager().scrollToPosition(firstVisiblePosition);
+//        getLayoutManager().scrollToPosition(firstVisiblePosition);
     }
 
     /**
@@ -248,10 +264,10 @@ public class XRecyclerView extends RecyclerView {
      */
     private int getFirstVisiblePosition() {
         int position;
-        if (getLayoutManager() instanceof LinearLayoutManager) {
-            position = ((LinearLayoutManager) getLayoutManager()).findFirstVisibleItemPosition();
-        } else if (getLayoutManager() instanceof GridLayoutManager) {
+        if (getLayoutManager() instanceof GridLayoutManager) {
             position = ((GridLayoutManager) getLayoutManager()).findFirstVisibleItemPosition();
+        } else if (getLayoutManager() instanceof LinearLayoutManager) {
+            position = ((LinearLayoutManager) getLayoutManager()).findFirstVisibleItemPosition();
         } else if (getLayoutManager() instanceof StaggeredGridLayoutManager) {
             StaggeredGridLayoutManager layoutManager = (StaggeredGridLayoutManager) getLayoutManager();
             int[] lastPositions = layoutManager.findFirstVisibleItemPositions(new int[layoutManager.getSpanCount()]);
@@ -278,10 +294,10 @@ public class XRecyclerView extends RecyclerView {
      */
     private int getLastVisiblePosition() {
         int position;
-        if (getLayoutManager() instanceof LinearLayoutManager) {
-            position = ((LinearLayoutManager) getLayoutManager()).findLastVisibleItemPosition();
-        } else if (getLayoutManager() instanceof GridLayoutManager) {
+        if (getLayoutManager() instanceof GridLayoutManager) {
             position = ((GridLayoutManager) getLayoutManager()).findLastVisibleItemPosition();
+        } else if (getLayoutManager() instanceof LinearLayoutManager) {
+            position = ((LinearLayoutManager) getLayoutManager()).findLastVisibleItemPosition();
         } else if (getLayoutManager() instanceof StaggeredGridLayoutManager) {
             StaggeredGridLayoutManager layoutManager = (StaggeredGridLayoutManager) getLayoutManager();
             int[] lastPositions = layoutManager.findLastVisibleItemPositions(new int[layoutManager.getSpanCount()]);
@@ -311,9 +327,31 @@ public class XRecyclerView extends RecyclerView {
     }
 
     /**
+     * 移除view
+     */
+    public void removeHeaderView(int index) {
+        mHeaderViews.delete(index + BASE_ITEM_TYPE_HEADER);
+    }
+
+    /**
+     * 移除view
+     */
+    public void removeAllHeaderView() {
+        mHeaderViews.clear();
+    }
+
+    public int getHeadViewSize() {
+        if (mHeaderViews == null) {
+            return 0;
+        }
+        return mHeaderViews.size();
+    }
+
+
+    /**
      * 设置是否支持自动加载更多
      */
-    public void setAutoLoadMoreEnable(boolean autoLoadMore) {
+    private void setAutoLoadMoreEnable(boolean autoLoadMore) {
         mIsFooterEnable = autoLoadMore;
     }
 
@@ -347,8 +385,8 @@ public class XRecyclerView extends RecyclerView {
         footer_progressbar.setVisibility(View.VISIBLE);
         footer_hint_text.setVisibility(View.VISIBLE);
         footer_hint_text.setText(TextUtils.isEmpty(footview_loading) ? getResources().getString(R.string.footer_hint_loading) : footview_loading);
-
         FootView.setOnClickListener(null);
+        getAdapter().notifyDataSetChanged();
     }
 
     /**
@@ -374,27 +412,22 @@ public class XRecyclerView extends RecyclerView {
                 footer_hint_text.setText(TextUtils.isEmpty(footview_loading) ? getResources().getString(R.string.footer_hint_loading) : footview_loading);
             }
         });
+        getAdapter().notifyDataSetChanged();
     }
 
     /**
      * 没有更多了
      */
     public void setFootNoMore() {
-        setAutoLoadMoreEnable(true);
-        setLoadingMore(false);
-        setLoadMore(false);
-
-        FootView.setVisibility(View.VISIBLE);
-        footer_progressbar.setVisibility(View.INVISIBLE);
-        footer_hint_text.setVisibility(View.VISIBLE);
-        footer_hint_text.setText(TextUtils.isEmpty(footview_loadfinish) ? getResources().getString(R.string.footer_hint_load_finish) : footview_loadfinish);
-        FootView.setOnClickListener(null);
+        setFootNoMore(null);
     }
 
     /**
      * 没有更多了
+     *
+     * @param onClickListener 监听
      */
-    public void setFootNoMore(OnClickListener l) {
+    public void setFootNoMore(OnClickListener onClickListener) {
         setAutoLoadMoreEnable(true);
         setLoadingMore(false);
         setLoadMore(false);
@@ -403,7 +436,8 @@ public class XRecyclerView extends RecyclerView {
         FootView.setVisibility(View.VISIBLE);
         footer_hint_text.setVisibility(View.VISIBLE);
         footer_hint_text.setText(TextUtils.isEmpty(footview_loadfinish) ? getResources().getString(R.string.footer_hint_load_finish) : footview_loadfinish);
-        FootView.setOnClickListener(l);
+        FootView.setOnClickListener(onClickListener);
+        getAdapter().notifyDataSetChanged();
     }
 
     /**
@@ -416,19 +450,13 @@ public class XRecyclerView extends RecyclerView {
 
         FootView.setVisibility(View.GONE);
         FootView.setOnClickListener(null);
+        getAdapter().notifyDataSetChanged();
     }
 
     /**
-     * 主动刷新
-     */
-    public void refresh() {
-        mAutoLoadAdapter.notifyDataSetChanged();
-    }
-    
-    /**
      * 获取XRecyclerView的高度
      *
-     * @param dividerHeight 间距
+     * @param dividerHeight 分割线高度
      * @return XRecyclerView的高度
      */
     public int getScollYDistance(int dividerHeight) {
@@ -442,7 +470,7 @@ public class XRecyclerView extends RecyclerView {
     /**
      * 获取XRecyclerView的宽度
      *
-     * @param dividerWidth 间距
+     * @param dividerWidth 分割线宽度
      * @return XRecyclerView的宽度
      */
     public int getScollXDistance(int dividerWidth) {

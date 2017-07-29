@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_1"
+        android:title="LinearLayoutManager.VERTICAL" />
+    <item
+        android:id="@+id/menu_2"
+        android:title="LinearLayoutManager.HORIZONTAL" />
+    <item
+        android:id="@+id/menu_3"
+        android:title="GridLayoutManager.VERTICAL" />
+    <item
+        android:id="@+id/menu_4"
+        android:title="GridLayoutManager.HORIZONTAL" />
+</menu>
