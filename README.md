@@ -1,8 +1,6 @@
 # XRecyclerView
-![Demo](https://github.com/mzj21/xrecyclerview/blob/master/screenshots/1.gif?raw=true)
-![Demo](https://github.com/mzj21/xrecyclerview/blob/master/screenshots/2.gif?raw=true)
-![Demo](https://github.com/mzj21/xrecyclerview/blob/master/screenshots/3.png?raw=true)
-![Demo](https://github.com/mzj21/xrecyclerview/blob/master/screenshots/4.png?raw=true)
+![Demo](https://github.com/mzj21/xrecyclerview/blob/master/screenshots/1.gif?raw=true)![Demo](https://github.com/mzj21/xrecyclerview/blob/master/screenshots/2.gif?raw=true)
+![Demo](https://github.com/mzj21/xrecyclerview/blob/master/screenshots/3.png?raw=true)![Demo](https://github.com/mzj21/xrecyclerview/blob/master/screenshots/4.png?raw=true)
 
 ### 简介
 自定义RecyclerView，支持添加多个head，支持加载更多，支持自定义分割线，支持自定义加载更多各种状态的文字、颜色、字体大小。如需添加刷新请使用XRecyclerViewRefresh，参照xrecyclerviewsample。
