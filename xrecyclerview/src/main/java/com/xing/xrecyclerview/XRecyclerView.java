@@ -386,7 +386,6 @@ public class XRecyclerView extends RecyclerView {
         footer_hint_text.setVisibility(View.VISIBLE);
         footer_hint_text.setText(TextUtils.isEmpty(footview_loading) ? getResources().getString(R.string.footer_hint_loading) : footview_loading);
         FootView.setOnClickListener(null);
-        getAdapter().notifyDataSetChanged();
     }
 
     /**
@@ -412,7 +411,6 @@ public class XRecyclerView extends RecyclerView {
                 footer_hint_text.setText(TextUtils.isEmpty(footview_loading) ? getResources().getString(R.string.footer_hint_loading) : footview_loading);
             }
         });
-        getAdapter().notifyDataSetChanged();
     }
 
     /**
@@ -437,7 +435,6 @@ public class XRecyclerView extends RecyclerView {
         footer_hint_text.setVisibility(View.VISIBLE);
         footer_hint_text.setText(TextUtils.isEmpty(footview_loadfinish) ? getResources().getString(R.string.footer_hint_load_finish) : footview_loadfinish);
         FootView.setOnClickListener(onClickListener);
-        getAdapter().notifyDataSetChanged();
     }
 
     /**
@@ -450,7 +447,6 @@ public class XRecyclerView extends RecyclerView {
 
         FootView.setVisibility(View.GONE);
         FootView.setOnClickListener(null);
-        getAdapter().notifyDataSetChanged();
     }
 
     /**
