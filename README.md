@@ -28,7 +28,7 @@ allprojects {
 Step 2. Add the dependency
 ```
 dependencies {
-	    compile 'com.github.mzj21:XRecyclerView:1.4.1'
+	    compile 'com.github.mzj21:XRecyclerView:1.4.5'
 }
 ```
 
