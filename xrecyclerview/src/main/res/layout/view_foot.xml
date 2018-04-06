@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -8,7 +9,8 @@
         android:layout_width="@dimen/_20dp"
         android:layout_height="@dimen/_20dp"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/footer_hint_text" />
+        android:layout_toLeftOf="@+id/footer_hint_text"
+        android:layout_toStartOf="@+id/footer_hint_text" />
 
     <TextView
         android:id="@+id/footer_hint_text"
@@ -18,5 +20,6 @@
         android:gravity="center"
         android:padding="@dimen/_5dp"
         android:text="@string/footer_hint_loading"
-        android:textColor="@color/color_cccccc" />
+        android:textColor="@color/color_cccccc"
+        tools:ignore="RelativeOverlap" />
 </RelativeLayout>

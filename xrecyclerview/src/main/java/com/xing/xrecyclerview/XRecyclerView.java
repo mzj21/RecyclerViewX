@@ -33,7 +33,8 @@ public class XRecyclerView extends RecyclerView {
     private int mLoadMorePosition;              // 标记加载更多的position
     private LoadMoreListener mLoadMoreListener; // 加载更多的监听-业务需要实现加载数据
     private SparseArrayCompat<View> mHeaderViews = new SparseArrayCompat<>();
-    private View FootView;
+    private View footview;
+    private RecyclerView.LayoutParams params_foot;
     private ProgressBar footer_progressbar;
     private TextView footer_hint_text;
     private AutoLoadAdapter.HeaderViewHolder headerViewHolder;
@@ -93,9 +94,9 @@ public class XRecyclerView extends RecyclerView {
                 }
             }
         });
-        FootView = View.inflate(getContext(), R.layout.view_foot, null);
-        footer_hint_text = (TextView) FootView.findViewById(R.id.footer_hint_text);
-        footer_progressbar = (ProgressBar) FootView.findViewById(R.id.footer_progressbar);
+        footview = View.inflate(getContext(), R.layout.view_foot, null);
+        footer_hint_text = footview.findViewById(R.id.footer_hint_text);
+        footer_progressbar = footview.findViewById(R.id.footer_progressbar);
         footer_hint_text.setTextSize(TypedValue.COMPLEX_UNIT_PX, footview_textsize);
         footer_hint_text.setTextColor(footview_textcolor);
     }
@@ -104,9 +105,9 @@ public class XRecyclerView extends RecyclerView {
     public void setLayoutManager(LayoutManager layout) {
         super.setLayoutManager(layout);
         if (((LinearLayoutManager) layout).getOrientation() == LinearLayoutManager.VERTICAL) {
-            FootView.setLayoutParams(new LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            footview.setLayoutParams(new LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         } else {
-            FootView.setLayoutParams(new LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT));
+            footview.setLayoutParams(new LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT));
         }
     }
 
@@ -193,7 +194,7 @@ public class XRecyclerView extends RecyclerView {
                 return new HeaderViewHolder(mHeaderViews.get(viewType));
             }
             if (viewType == TYPE_FOOTER) {
-                return new FooterViewHolder(FootView);
+                return new FooterViewHolder(footview);
             } else {
                 return mInternalAdapter.onCreateViewHolder(parent, viewType);
             }
@@ -246,6 +247,7 @@ public class XRecyclerView extends RecyclerView {
         if (adapter != null) {
             mAutoLoadAdapter = new AutoLoadAdapter(adapter);
         }
+        params_foot = (LayoutParams) footview.getLayoutParams();
         super.swapAdapter(mAutoLoadAdapter, true);
     }
 
@@ -381,11 +383,11 @@ public class XRecyclerView extends RecyclerView {
         setLoadingMore(false);
         setLoadMore(true);
 
-        FootView.setVisibility(View.VISIBLE);
+        footview.setVisibility(View.VISIBLE);
         footer_progressbar.setVisibility(View.VISIBLE);
         footer_hint_text.setVisibility(View.VISIBLE);
         footer_hint_text.setText(TextUtils.isEmpty(footview_loading) ? getResources().getString(R.string.footer_hint_loading) : footview_loading);
-        FootView.setOnClickListener(null);
+        footview.setOnClickListener(null);
     }
 
     /**
@@ -396,11 +398,11 @@ public class XRecyclerView extends RecyclerView {
         setLoadingMore(false);
         setLoadMore(false);
 
-        FootView.setVisibility(View.VISIBLE);
+        footview.setVisibility(View.VISIBLE);
         footer_progressbar.setVisibility(View.INVISIBLE);
         footer_hint_text.setVisibility(View.VISIBLE);
         footer_hint_text.setText(TextUtils.isEmpty(footview_loaderror) ? getResources().getString(R.string.footer_hint_load_error) : footview_loaderror);
-        FootView.setOnClickListener(new OnClickListener() {
+        footview.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 mLoadMoreListener.onLoadMore();
@@ -431,10 +433,10 @@ public class XRecyclerView extends RecyclerView {
         setLoadMore(false);
 
         footer_progressbar.setVisibility(View.INVISIBLE);
-        FootView.setVisibility(View.VISIBLE);
+        footview.setVisibility(View.VISIBLE);
         footer_hint_text.setVisibility(View.VISIBLE);
         footer_hint_text.setText(TextUtils.isEmpty(footview_loadfinish) ? getResources().getString(R.string.footer_hint_load_finish) : footview_loadfinish);
-        FootView.setOnClickListener(onClickListener);
+        footview.setOnClickListener(onClickListener);
     }
 
     /**
@@ -445,8 +447,10 @@ public class XRecyclerView extends RecyclerView {
         setLoadingMore(false);
         setLoadMore(false);
 
-        FootView.setVisibility(View.GONE);
-        FootView.setOnClickListener(null);
+        params_foot.height = 0;
+        footview.setLayoutParams(params_foot);
+        footview.setVisibility(View.GONE);
+        footview.setOnClickListener(null);
     }
 
     /**
